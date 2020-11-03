@@ -5,7 +5,7 @@ This was made in the Unity Game Engine using C#.
 [Play Here](https://sach-p.github.io/SpaceShooter2D/)
 
 # Credits
-These scripts were modefied from the following
+These scripts were modified from the following
 
 Brackeys:
 
