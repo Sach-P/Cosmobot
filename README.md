@@ -2,7 +2,7 @@
 
 This was made in the Unity Game Engine using C#. 
 
-[Play Here](https://sach-p.github.io/SpaceShooter2D/)
+[Play Here](https://sach-p.github.io/Cosmobot/)
 
 ## Credits
 These scripts were modified from the following
