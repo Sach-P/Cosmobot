@@ -20,7 +20,7 @@ public class WaveUI : MonoBehaviour
     {
         if(spawner.NextWave == (spawner.waves.Length))
         {
-            waveText.text = "ROUNDS";
+            waveText.text = "WAVES";
             waveCountText.text = "COMPLETE";
             waveCountText.color = Color.green;
         }
@@ -32,7 +32,7 @@ public class WaveUI : MonoBehaviour
         {
             waveCountText.text = spawner.NextWave + "." + spawner.NewGamePlus;
             waveCountText.color = Color.red;
-            waveText.text = "ROUND";
+            waveText.text = "WAVE";
         }
 
         if (spawner.State == WaveSpawner.SpawnState.counting)

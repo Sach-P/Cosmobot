@@ -13,5 +13,8 @@ public class PlayerUI : MonoBehaviour
         {
             health.color = Color.red;
         }
+        else{
+            health.color = Color.green;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Enemy : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 5f;
 
     public GameObject destEffect;
+    public GameObject healthDrop;
+
+    public int size = 1;
 
     void Start()
     {
@@ -34,11 +38,13 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = player.position - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        rigid.rotation = angle;
-        direction.Normalize();
-        movement = direction;
+        if(player != null){
+            Vector3 direction = player.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            rigid.rotation = angle;
+            direction.Normalize();
+            movement = direction;
+        }
 
     }
 
@@ -58,8 +64,17 @@ public class Enemy : MonoBehaviour
         if (enemyStats.Health <= 0)
         {
             
-            GameMaster.KillEnemy(this);
+            GameMaster.KillEnemy(this, size);
+
             Instantiate(destEffect, new Vector3(transform.position.x, transform.position.y, -10), Quaternion.identity);
+            if(size == 2 && Random.Range(0, 100) >= 70)
+                Instantiate(healthDrop, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+            else if(size == 3){
+                for(int i = 0; i < 20; i++){
+                    var newHealthDrop = Instantiate(healthDrop, new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+                    newHealthDrop.GetComponent<Rigidbody2D>().AddRelativeForce(new Vector2(Random.Range(-1f, 1f), 1f) * Random.Range(100f, 600f));
+                }
+            }
 
         }
 
@@ -70,7 +85,6 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Player player = collision.GetComponent<Player>();
-
             if (canTakeDamage)
             {
                 if (player != null)
@@ -78,8 +92,6 @@ public class Enemy : MonoBehaviour
                     player.DamagePlayer(damage);
                     StartCoroutine(WaitForSeconds());
                 }
-
-                
             }
             
         }
@@ -90,6 +102,5 @@ public class Enemy : MonoBehaviour
         canTakeDamage = false;
         yield return new WaitForSecondsRealtime(damageTime);
         canTakeDamage = true;
-
     }
 }

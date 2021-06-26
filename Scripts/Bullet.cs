@@ -15,18 +15,19 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Destroy(gameObject, destroyTime);
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
-        if (hit.collider.CompareTag("Enemy"))
-        {
-            if(hit.collider.GetComponent<Enemy>() != null)
+        if(this.transform.childCount > 0 && this.transform.GetChild(0).gameObject != null){
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, distance);
+            if (hit.collider != null && hit.collider.CompareTag("Enemy"))
             {
-                hit.collider.GetComponent<Enemy>().DamageEnemy(damage);
-            }               
+                if(hit.collider.GetComponent<Enemy>() != null)
+                {
+                    hit.collider.GetComponent<Enemy>().DamageEnemy(damage);
+                }               
 
-            Destroy(gameObject);
-            Instantiate(destEffect, transform.position, Quaternion.identity);
+                Destroy(this.transform.GetChild(0).gameObject);
+                Instantiate(destEffect, transform.position, Quaternion.identity);
+            }
         }
-        
 
     }
 }

@@ -14,7 +14,6 @@ public class Shoot : MonoBehaviour
     [SerializeField]
     private float shakeDur;
 
-
     public float bulletSpeed = 60.0f;
     public float startBulletTime = 0.2f;
     public float bulletTime = 0.0f;
@@ -33,7 +32,7 @@ public class Shoot : MonoBehaviour
         float rotationZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         player.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rotationZ);
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !UI.GameIsPaused)
         {
             float distance = difference.magnitude;
             Vector2 direction = difference / distance;
