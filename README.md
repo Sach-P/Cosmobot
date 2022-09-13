@@ -5,7 +5,7 @@ This was made in the Unity Game Engine using C#.
 [Play Here](https://sach-p.github.io/Cosmobot/)
 
 ## Credits
-These scripts were modified from the following
+These videos helped me when creating this project
 
 for the enemy spawning in WaveSpawner.cs
 * [How to make a Wave Spawner in Unity 5 - Part 1/2](https://www.youtube.com/watch?v=Vrld13ypX_I&t=4s)
